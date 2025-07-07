@@ -1,0 +1,891 @@
+/* Desktop Clear Filters Button */
+.nasa-clear-filters-desktop {
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.nasa-clear-filters-desktop a {
+    color: #666;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s ease;
+}
+
+.nasa-clear-filters-desktop a:hover {
+    color: #0635d3;
+}
+
+.nasa-clear-filters-desktop svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Show only on desktop */
+.nasa-desktop-only {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .nasa-desktop-only {
+        display: block;
+    }
+    .nasa-mobile-only {
+        display: none;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Color Filters Grid Alignment */
+.nasa-variation-filters.nasa-variations-color {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -5px;
+    padding: 0;
+    list-style: none;
+}
+
+.nasa-variation-filters.nasa-variations-color li {
+    flex: 0 0 auto;
+    width: auto;
+    padding: 5px;
+    margin: 0;
+}
+
+.nasa-variation-filters.nasa-variations-color a {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 20px;
+ 
+    transition: all 0.3s ease;
+}
+
+.nasa-variation-filters.nasa-variations-color a:hover {
+    background: #eee;
+}
+
+.nasa-filter-color-span {
+    margin-right: 8px;
+}
+
+.nasa-text-variation-color {
+    white-space: nowrap;
+}
+
+/* Remove the small-block-grid settings if they're causing issues */
+.nasa-variation-filters.nasa-variations-color.small-block-grid-2,
+.nasa-variation-filters.nasa-variations-color.medium-block-grid-4,
+.nasa-variation-filters.nasa-variations-color.large-block-grid-7 {
+    display: flex !important;
+    flex-wrap: wrap;
+}
+
+
+
+
+:root {
+  --color-text: #333333;
+  --color-primary: #000000;
+  --color-primary-hover: #0635d3;
+  --color-border: #ccc;
+  --color-bg-light: #f2f2f2;
+  --transition: 200ms ease;
+}
+
+/* Reset & Base Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+/* Links & Interactive Elements */
+a {
+  background: transparent;
+  color: var(--color-text);
+  text-decoration: none;
+  line-height: inherit;
+  transition: color var(--transition);
+}
+a:focus { outline: thin dotted; }
+a:active, a:hover { outline: 0; }
+a:active { color: var(--color-text); }
+a:hover { color: var(--color-primary); cursor: pointer; }
+body a:hover { color: var(--color-primary-hover); }
+
+/* Form Elements */
+input, select {
+  font: inherit;
+  margin: 0;
+  line-height: normal;
+}
+input[type="search"] { -webkit-appearance: textfield; }
+input::-webkit-search-decoration { -webkit-appearance: none; }
+
+select {
+  width: 100%;
+  text-transform: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 1em;
+}
+select:hover { cursor: pointer; }
+
+/* SVG & Layout Utilities */
+svg:not(:root) { overflow: hidden; }
+.nasa-flex { display: flex; align-items: center; }
+.jbw { justify-content: space-between; }
+
+/* Text Elements & Lists */
+p {
+  font-size: 100%;
+  margin-bottom: 1.37931em;
+}
+p:last-child, p:empty { margin-bottom: 0; }
+p:empty { display: none; }
+
+ul {
+  font-size: 1em;
+  margin: 0 0 1.37931em;
+  padding: 0;
+  list-style-position: inside;
+}
+ul:last-child { margin-bottom: 0; }
+
+/* Utility Classes */
+.hidden-tag { display: none !important; }
+.nasa-tip { position: relative; }
+.margin-right-5 { margin-right: 5px !important; }
+.nasa-bold-700 { font-weight: 600 !important; }
+.nasa-min-height { min-height: 1px; }
+
+
+/* Widget Base Styles */
+.widget li {
+  list-style: none;
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 15px;
+}
+
+.nasa-text-variation { color: inherit; }
+
+/* Default Filter Checkbox */
+.nasa-filter-default:before {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  display: block;
+  top: 0;
+  left: 0;
+  background: #EAEAEA;
+  border-radius: 50%;
+}
+
+/* Variation Filters */
+.widget .nasa-variation-filters li {
+  padding: 0 10px;
+}
+.widget .nasa-variation-filters li:before { display: none; }
+
+.nasa-variation-filters a {
+  display: inline-block;
+  line-height: 20px;
+  position: relative;
+  padding: 5px 0 5px 40px;
+}
+.nasa-variation-filters a:after {
+  content: "";
+  width: 6px;
+  height: 10px;
+  display: block;
+  border: solid transparent;
+  border-width: 0 2px 2px 0;
+  position: absolute;
+  top: 9px;
+  left: 12px;
+  transform: rotate(45deg);
+}
+.nasa-variation-filters a:hover:after { border-color: #555; }
+
+/* Price Filter Widget */
+.widget_price_filter .price_slider {
+  margin-bottom: 1em;
+  background: #eee;
+}
+.widget_price_filter .price_slider_amount {
+  text-align: right;
+  line-height: 2.4em;
+  font-size: 0.8751em;
+}
+.widget_price_filter .price_slider_amount input#min_price,
+.widget_price_filter .price_slider_amount input#max_price {
+  display: none;
+  float: left;
+  width: 25%;
+  height: 32px;
+  margin-right: 12px;
+  font-size: 110%;
+  text-align: center;
+}
+.widget_price_filter .price_slider_amount .price_label {
+  float: left;
+  font-size: 125%;
+  line-height: 230%;
+  margin-bottom: 10px;
+  position: relative;
+}
+.widget_price_filter .ui-slider {
+  position: relative;
+  text-align: left;
+}
+.widget_price_filter .ui-slider .ui-slider-handle {
+  position: absolute;
+  z-index: 2;
+  cursor: pointer;
+  outline: none;
+  top: -0.5em;
+}
+.widget_price_filter .ui-slider .ui-slider-handle:last-child { margin-left: 0; }
+.widget_price_filter .ui-slider .ui-slider-handle:before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  left: -14px;
+  top: -6px;
+  border: 1px solid #999;
+  border-radius: 50%;
+  background-color: #fff;
+}
+.widget_price_filter .ui-slider .ui-slider-handle:after {
+  display: inline-block;
+  position: absolute;
+  content: " ";
+  width: 8px;
+  height: 8px;
+  left: -3px;
+  top: 5px;
+  border-radius: 2px;
+  background-color: #fff !important;
+  transform: scale(1, 1);
+}
+.widget_price_filter .ui-slider .ui-slider-range {
+  position: absolute;
+  z-index: 1;
+  font-size: 0.7em;
+  display: block;
+  border: 0;
+  background: #c1c1c1;
+}
+.widget_price_filter .price_slider_wrapper { padding-top: 15px; }
+.widget_price_filter .price_slider_wrapper .reset_price {
+  font-size: 0;
+  color: transparent;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 48%;
+  right: -30px;
+  transform: translateY(-50%);
+}
+.widget_price_filter .price_slider_wrapper .reset_price:before,
+.widget_price_filter .price_slider_wrapper .reset_price:after {
+  top: 9px;
+  left: 4px;
+  width: 10px;
+}
+.widget_price_filter .ui-slider-horizontal {
+  height: 0.3em;
+  margin: 0 14px;
+}
+.widget_price_filter .ui-slider-horizontal .ui-slider-range {
+  top: 0;
+  height: 100%;
+}
+
+
+/* Top Sidebar Specific Styles */
+.nasa-top-sidebar {
+  padding-top: 0;
+}
+.nasa-top-sidebar .nasa-toggle-widget {
+  display: none;
+}
+.nasa-top-sidebar .widget_price_filter .price_slider_amount .price_label {
+  margin-bottom: 0;
+}
+.nasa-top-sidebar .nasa-widget-wrap {
+  display: none;
+  overflow: hidden;
+}
+.nasa-top-sidebar .nasa-widget-wrap .widget-title {
+  display: none;
+}
+.nasa-top-sidebar .nasa-widget-wrap .widget_price_filter .price_slider_wrapper {
+  padding-bottom: 0;
+}
+.nasa-top-sidebar .nasa-widget-wrap .widget_price_filter form {
+  margin-bottom: 0;
+}
+
+/* Filter Container */
+.filters-container {
+  padding: 20px 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+  body input,
+  body select {
+    font-size: 16px; /* Better mobile readability */
+  }
+  .hide-for-small {
+    display: none;
+  }
+  .nasa-change-view {
+    display: none !important;
+  }
+  .filter-tabs,
+  .woocommerce-result-count {
+    display: none;
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hide-for-medium {
+    display: none;
+  }
+}
+
+/* Desktop Filter Styles */
+@media (min-width: 768px) {
+  .woocommerce-ordering {
+    position: relative;
+  }
+  .woocommerce-ordering::after {
+    content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDMyIDMyIiBzdHJva2Utd2lkdGg9Ii41IiBzdHJva2U9IiMzMzMzMzMiPgo8cGF0aCBkPSJNMTUuMjMzIDE5LjE3NWwwLjc1NCAwLjc1NCA2LjAzNS02LjAzNS0wLjc1NC0wLjc1NC01LjI4MSA1LjI4MS01LjI1Ni01LjI1Ni0wLjc1NCAwLjc1NCAzLjAxMyAzLjAxM3oiIGZpbGw9IiMzMzMzMzMiIC8+Cjwvc3ZnPg==");
+    text-align: center;
+    line-height: 10px;
+    margin-left: 5px;
+    width: 15px;
+  }
+  .woocommerce-ordering select {
+    padding-right: 15px;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    cursor: pointer;
+  }
+}
+
+
+
+/* Filter Tabs Component */
+.filter-tabs {
+  margin-bottom: 0;
+  line-height: 1;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-tabs .nasa-change-layout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  cursor: pointer;
+}
+
+/* Grid Layout Toggle Styles */
+.filter-tabs.nasa-change-layout-img-2 .nasa-change-layout {
+  border-radius: 4px;
+  background: var(--color-bg-light);
+  height: 34px;
+  width: 34px;
+}
+.filter-tabs.nasa-change-layout-img-2 .nasa-change-layout svg {
+  color: #000;
+  height: 12px;
+}
+.filter-tabs.nasa-change-layout-img-2 .nasa-change-layout.active,
+.filter-tabs.nasa-change-layout-img-2 .nasa-change-layout:hover {
+  background: #333;
+}
+.filter-tabs.nasa-change-layout-img-2 .nasa-change-layout.active svg,
+.filter-tabs.nasa-change-layout-img-2 .nasa-change-layout:hover svg {
+  color: #fff;
+}
+
+/* Sort Bar Component */
+.sort-bar {
+  margin-bottom: 0;
+  float: left;
+}
+.sort-bar li {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+/* Ordering Dropdown */
+.sort-bar select[name="orderby"] {
+  border: none;
+  font-size: 110%;
+  padding: 0 5px;
+  margin: 0;
+  line-height: 44px;
+  color: inherit;
+  font-weight: normal;
+  outline: none;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.sort-bar select[name="orderby"] option {
+  padding: 0 15px;
+  font-weight: normal;
+  font-size: 85%;
+}
+
+/* Filter Order Dropdown */
+.sort-bar .nasa-filter-order {
+  cursor: pointer;
+  position: relative;
+  z-index: 9;
+}
+.sort-bar .nasa-filter-order .woocommerce-ordering {
+  padding: 0 10px;
+  margin: 3px 0;
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+}
+.sort-bar .nasa-filter-order .woocommerce-ordering .nasa-ordering {
+  height: 100%;
+  padding: 0;
+  position: static;
+}
+.sort-bar .nasa-filter-order .woocommerce-ordering .nasa-ordering .sub-ordering {
+  left: auto;
+  right: 0;
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  border-radius: 3px;
+}
+.sort-bar .nasa-filter-order .woocommerce-ordering .sort-text {
+  line-height: 33px;
+  white-space: nowrap;
+}
+.sort-bar .nasa-filter-order:hover .woocommerce-ordering {
+  border-color: #000;
+}
+.sort-bar .nasa-filter-order:hover .nasa-ordering .sub-ordering {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(10px);
+}
+
+
+/* Topbar Container */
+.nasa-topbar-all {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.nasa-topbar-all .nasa-sort-by-action {
+  height: 42px;
+  display: flex;
+  align-items: center;
+}
+
+.nasa-topbar-all .nasa-filter-action {
+  min-width: 50%;
+  max-width: 70%;
+}
+
+/* Labels Filter (Accordion Style) */
+.nasa-labels-filter-top {
+  display: flex;
+  width: 100%;
+  min-height: 1px;
+}
+
+.nasa-labels-filter-top .nasa-labels-filter-accordion {
+  line-height: 2.55;
+  font-size: 110%;
+  width: 100%;
+  min-height: 42px;
+  overflow: hidden;
+  position: relative;
+  flex-wrap: wrap;
+  background: 
+    linear-gradient(var(--color-bg-light) 100%, transparent 0),
+    linear-gradient(var(--color-bg-light) 100%, transparent 0),
+    linear-gradient(var(--color-bg-light) 100%, transparent 0),
+    linear-gradient(var(--color-bg-light) 100%, transparent 0),
+    linear-gradient(var(--color-bg-light) 100%, transparent 0);
+  background-size: 100px 20px;
+  background-position: 0 11px, 120px 11px, 240px 11px, 360px 11px, 480px 11px;
+}
+
+.nasa-labels-filter-top .nasa-labels-filter-accordion::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  z-index: 99;
+  background: linear-gradient(
+    90deg, 
+    rgba(255, 255, 255, 0) 20%, 
+    rgba(255, 255, 255, 0.8) 50%, 
+    rgba(255, 255, 255, 0) 80%
+  );
+  animation: crazy-loading 1.5s infinite;
+}
+
+.nasa-labels-filter-top .nasa-labels-filter-accordion.nasa-inited {
+  background: transparent;
+  overflow: visible;
+}
+
+.nasa-labels-filter-top .nasa-labels-filter-accordion.nasa-inited::after,
+.nasa-labels-filter-top .nasa-labels-filter-accordion:empty {
+  display: none;
+}
+
+/* Filter Top Row */
+.nasa-labels-filter-top .nasa-top-row-filter {
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+}
+
+.nasa-labels-filter-top .nasa-top-row-filter li {
+  list-style: none;
+  float: left;
+  margin-right: 20px;
+  font-size: 105%;
+  font-weight: 600;
+}
+
+.nasa-labels-filter-top .nasa-top-row-filter li .nasa-tab-filter-topbar {
+  display: flex;
+  align-items: center;
+}
+
+.nasa-labels-filter-top .nasa-top-row-filter li svg {
+  font-size: 125%;
+  margin-right: 5px;
+}
+
+.nasa-labels-filter-top .nasa-top-row-filter li .showing_info_top p {
+  margin: 0;
+  line-height: 2.55;
+  color: #999;
+}
+
+.nasa-labels-filter-top .nasa-top-row-filter li.last {
+  margin-right: 0;
+}
+
+/* WooCommerce Ordering Dropdown */
+.woocommerce-ordering {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.woocommerce-ordering select {
+  margin: 0;
+}
+
+.woocommerce-ordering .sub-ordering {
+  position: absolute;
+  top: 100%;
+  right: -18px;
+  z-index: 9999;
+  background: #fff;
+  border: 1px solid #efefef;
+  padding: 8px 0 10px;
+  display: none;
+  flex-direction: column;
+}
+
+.woocommerce-ordering .nasa-current-orderby {
+  color: var(--color-text);
+}
+
+.woocommerce-ordering .nasa-orderby {
+  display: flex;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 0 20px;
+  color: #aaa;
+}
+
+.woocommerce-ordering .nasa-orderby.nasa-active,
+.woocommerce-ordering .nasa-orderby:hover {
+  color: var(--color-text);
+}
+
+.woocommerce-ordering .nasa-ordering {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 10px 0;
+}
+
+/* Mobile Ordering Styles */
+@media (max-width: 767px) {
+  .woocommerce-ordering {
+    height: 44px;
+    position: static;
+    z-index: 1;
+    text-align: right;
+    line-height: 44px;
+    align-items: center;
+  }
+
+  .woocommerce-ordering::after {
+    content: url("data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KPHBhdGggZD0iTTI4LjI2MiA1Ljg3YzAtMS40NzItMS4xOTQtMi42NjUtMi42NjYtMi42NjVzLTIuNjY2IDEuMTkzLTIuNjY2IDIuNjY1YzAgMS4yODkgMC45MTYgMi4zNjUgMi4xMzMgMi42MTJ2MTguMThoMS4wNjZ2LTE4LjE4YzEuMjE3LTAuMjQ3IDIuMTMzLTEuMzIzIDIuMTMzLTIuNjEyek0yNS41OTYgNy40N2MtMC44ODIgMC0xLjU5OS0wLjcxNy0xLjU5OS0xLjU5OXMwLjcxNy0xLjU5OSAxLjU5OS0xLjU5OWMwLjg4MiAwIDEuNTk5IDAuNzE3IDEuNTk5IDEuNTk5cy0wLjcxNyAxLjU5OS0xLjU5OSAxLjU5OXoiIGZpbGw9ImN1cnJlbnRDb2xvciI+PC9wYXRoPgo8cGF0aCBkPSJNNi45MzcgMjMuNTE3di0xOC4xOGgtMS4wNjZ2MTguMThjLTEuMjE3IDAuMjQ3LTIuMTMyIDEuMzIyLTIuMTMyIDIuNjEyIDAgMS40NzIgMS4xOTQgMi42NjYgMi42NjYgMi42NjZzMi42NjYtMS4xOTQgMi42NjYtMi42NjZjMC0xLjI5LTAuOTE2LTIuMzY1LTIuMTMzLTIuNjEyek02LjQwNCAyNy43MjljLTAuODgyIDAtMS41OTktMC43MTctMS41OTktMS41OTlzMC43MTctMS41OTkgMS41OTktMS41OTkgMS41OTkgMC43MTcgMS41OTkgMS41OTktMC43MTcgMS41OTktMS41OTkgMS41OTl6IiBmaWxsPSJjdXJyZW50Q29sb3IiPjwvcGF0aD4KPHBhdGggZD0iTTE2LjUzMyAxMy4zODh2LTguMDUwaC0xLjA2NnY4LjA1MGMtMS4yMTcgMC4yNDctMi4xMzMgMS4zMjMtMi4xMzMgMi42MTJzMC45MTYgMi4zNjUgMi4xMzMgMi42MTJ2OC4wNTBoMS4wNjZ2LTguMDUwYzEuMjE3LTAuMjQ3IDIuMTMzLTEuMzIzIDIuMTMzLTIuNjEycy0wLjkxNi0yLjM2NS0yLjEzMy0yLjYxMnpNMTYgMTcuNTk5Yy0wLjg4MiAwLTEuNTk5LTAuNzE3LTEuNTk5LTEuNTk5czAuNzE3LTEuNTk5IDEuNTk5LTEuNTk5IDEuNTk5IDAuNzE3IDEuNTk5IDEuNTk5LTAuNzE3IDEuNTk5LTEuNTk5IDEuNTk5eiIgZmlsbD0iY3VycmVudENvbG9yIj48L3BhdGg+Cjwvc3ZnPgo=");
+    margin: 0 2px;
+    line-height: 10px;
+  }
+
+  .woocommerce-ordering select {
+    position: absolute;
+    inset: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    font-weight: 400;
+    text-indent: -9999px;
+    appearance: none;
+  }
+
+  .woocommerce-ordering select option {
+    font-size: 14px;
+  }
+}
+
+/* Animation Keyframes */
+@keyframes crazy-loading {
+  0% { transform: skewX(-45deg) translateX(-80%); }
+  100% { transform: skewX(-45deg) translateX(80%); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Color Swatch Base Styles */
+.nasa-filter-color-span {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-flex;
+    margin-right: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+}
+
+/* Single color (100% full circle) */
+.nasa-filter-color-span > span {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Two-color version (50% each) */
+.nasa-filter-color-span > span:first-child:nth-last-child(2),
+.nasa-filter-color-span > span:first-child:nth-last-child(2) ~ span {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+}
+
+.nasa-filter-color-span > span:first-child:nth-last-child(2) {
+    left: 0;
+}
+
+.nasa-filter-color-span > span:first-child:nth-last-child(2) ~ span {
+    left: 50%;
+}
+
+/* Completely remove white top portion */
+.nasa-filter-color-span > span::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%; /* Changed to 0% to remove white portion */
+    background: white;
+    z-index: 1;
+}
+
+/* Text label styling */
+.nasa-text-variation-color {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================
+   FINAL OPTIMIZATION PASS
+   ======================== */
+
+/* Consolidated Widget Styles */
+.widget {
+  .nasa-variation-filters a {
+    transition: all var(--transition);
+    
+    &:hover {
+      color: var(--color-primary);
+      transform: translateX(3px);
+    }
+  }
+
+  .price_slider_wrapper {
+    .ui-slider-handle {
+      transition: transform 100ms ease;
+      &:active {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+/* Unified Transition Properties */
+[class*="nasa-"] {
+  transition: 
+    color var(--transition),
+    background-color var(--transition),
+    border-color var(--transition);
+}
+
+/* Optimized Media Query Structure */
+@media (max-width: 767px) {
+  /* Mobile-specific overrides */
+  .nasa-topbar-all {
+    flex-direction: column;
+    gap: 15px;
+    
+    .nasa-filter-action {
+      min-width: 100%;
+      max-width: 100%;
+    }
+  }
+  
+  .filter-tabs {
+    float: none;
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Tablet-specific adjustments */
+  .nasa-labels-filter-top {
+    .nasa-labels-filter-accordion {
+      background-size: 80px 20px;
+      background-position: 0 11px, 90px 11px, 180px 11px;
+    }
+  }
+}
+
+/* Critical Accessibility Improvements */
+[role="button"],
+button,
+input[type="submit"] {
+  &:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+/* Micro-Optimizations */
+.nasa-labels-filter-accordion:empty {
+  display: none !important;
+}
+
+/* Final Size Reductions */
+.nasa-filter-default:before,
+.widget_price_filter .ui-slider-handle:before {
+  box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+}
+
+/* Removed Unused Rules */
+/*
+  .old-unsed-class { ... }  // Commented out but kept for reference
+*/
