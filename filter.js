@@ -481,6 +481,13 @@ setupPriceFilter(widget) {
     const select = orderingWrap.querySelector('select');
     if (!select) return;
 
+    // Add change event listener to the original select for fallback
+    select.addEventListener('change', function() {
+        const form = this.closest('form');
+        if (form) {
+            form.submit();
+        }
+    });
         const currentValue = select.value;
         const options = Array.from(select.options);
 
@@ -572,7 +579,11 @@ setupEventListeners() {
             const select = document.querySelector('.woocommerce-ordering select');
             if (select) {
                 select.value = value;
-                select.dispatchEvent(new Event('change'));
+                // Trigger WooCommerce form submission
+                const form = select.closest('form');
+                if (form) {
+                    form.submit();
+                }
             }
 
             const currentOrderby = orderbyLink.closest('.nasa-ordering').querySelector('.nasa-current-orderby');
@@ -744,6 +755,24 @@ setupEventListeners() {
             this.initializeComponents();
         }
 
+        // Update pagination if exists
+        const pagination = doc.querySelector('.woocommerce-pagination');
+        const currentPagination = document.querySelector('.woocommerce-pagination');
+        if (pagination && currentPagination) {
+            currentPagination.innerHTML = pagination.innerHTML;
+        }
+
+        // Update result count
+        const resultCount = doc.querySelector('.woocommerce-result-count');
+        const currentResultCount = document.querySelector('.woocommerce-result-count');
+        if (resultCount && currentResultCount) {
+            currentResultCount.innerHTML = resultCount.innerHTML;
+        }
+
+        // Update URL without page reload
+        if (window.history && window.history.pushState) {
+            window.history.pushState(null, '', url);
+        }
         // Auto-close mobile sidebar after selection
         const isMobile = window.matchMedia("(max-width: 767px)").matches;
         if (isMobile && this.topSidebar) {
@@ -776,6 +805,22 @@ setupEventListeners() {
         }
     }
 
+    // Reset ordering to default
+    const orderingSelect = document.querySelector('.woocommerce-ordering select');
+    if (orderingSelect) {
+        orderingSelect.value = 'menu_order'; // Reset to default sorting
+        
+        // Update custom ordering display
+        const currentOrderby = document.querySelector('.nasa-current-orderby');
+        if (currentOrderby) {
+            currentOrderby.textContent = 'Default sorting';
+        }
+        
+        // Update active state
+        document.querySelectorAll('.nasa-orderby').forEach(link => {
+            link.classList.toggle('nasa-active', link.dataset.value === 'menu_order');
+        });
+    }
     // Auto-close mobile sidebar after reset
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
     if (isMobile && this.topSidebar) {
@@ -784,8 +829,9 @@ setupEventListeners() {
         document.body.style.overflow = '';
     }
 
-    // Reload products without filters
-    this.handleFilterClick(window.location.pathname);
+    // Redirect to clean URL without filters
+    const baseUrl = window.location.pathname;
+    window.location.href = baseUrl;
 }
   
   
