@@ -243,9 +243,24 @@ ul:last-child { margin-bottom: 0; }
   border: solid transparent;
   border-width: 0 2px 2px 0;
   position: absolute;
-  top: 9px;
-  left: 12px;
-  transform: rotate(45deg);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  z-index: 2;
+}
+
+/* Ensure the color span is positioned relative for proper tick positioning */
+.nasa-filter-color-span {
+  position: relative;
+}
+
+/* Position tick mark specifically within the color circle */
+.nasa-variation-filters.nasa-variations-color a:after {
+  /* Position relative to the color span, not the link */
+  top: 15px; /* Half of 30px circle height */
+  left: 15px; /* Half of 30px circle width */
+  transform: translate(-50%, -50%) rotate(45deg);
+  z-index: 3;
 }
 .nasa-variation-filters a:hover:after { border-color: #555; }
 
@@ -506,6 +521,7 @@ ul:last-child { margin-bottom: 0; }
   margin: 3px 0;
   border: 1px solid var(--color-border);
   border-radius: 3px;
+  transition: border-color 0.2s ease;
 }
 .sort-bar .nasa-filter-order .woocommerce-ordering .nasa-ordering {
   height: 100%;
@@ -515,22 +531,110 @@ ul:last-child { margin-bottom: 0; }
 .sort-bar .nasa-filter-order .woocommerce-ordering .nasa-ordering .sub-ordering {
   left: auto;
   right: 0;
-  display: flex;
-  opacity: 0;
-  visibility: hidden;
-  border-radius: 3px;
+  position: absolute;
+  top: 100%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  min-width: 180px;
+  padding: 8px 0;
+  display: none;
+  flex-direction: column;
+  z-index: 999;
+  margin-top: 2px;
 }
+
+.sort-bar .nasa-filter-order .woocommerce-ordering .nasa-ordering .sub-ordering .nasa-orderby {
+  padding: 8px 16px;
+  color: #666;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  border: none;
+  background: none;
+  text-align: left;
+}
+
+.sort-bar .nasa-filter-order .woocommerce-ordering .nasa-ordering .sub-ordering .nasa-orderby:hover {
+  background: #f5f5f5;
+  color: #333;
+}
+
+.sort-bar .nasa-filter-order .woocommerce-ordering .nasa-ordering .sub-ordering .nasa-orderby.nasa-active {
+  background: #0635d3;
+  color: #fff;
+}
+
+.sort-bar .nasa-filter-order .woocommerce-ordering .nasa-ordering .sub-ordering .nasa-orderby.nasa-active:hover {
+  background: #0528b8;
+}
+
+/* Show dropdown on hover with delay */
+.sort-bar .nasa-filter-order:hover .woocommerce-ordering .nasa-ordering .sub-ordering {
+  display: flex;
+  animation: fadeInDown 0.2s ease-out;
+}
+
+/* Keep dropdown visible when hovering over it */
+.sort-bar .nasa-filter-order .woocommerce-ordering .nasa-ordering .sub-ordering:hover {
+  display: flex;
+}
+
+/* Improved hover area */
+.sort-bar .nasa-filter-order .woocommerce-ordering .nasa-ordering {
+  position: relative;
+}
+
+.sort-bar .nasa-filter-order .woocommerce-ordering .nasa-ordering::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: -10px;
+  right: -10px;
+  height: 10px;
+  background: transparent;
+  z-index: 998;
+}
+
+/* Current selection styling */
+.sort-bar .nasa-filter-order .woocommerce-ordering .nasa-ordering .nasa-current-orderby {
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.sort-bar .nasa-filter-order .woocommerce-ordering .nasa-ordering .nasa-current-orderby::after {
+  content: "▼";
+  font-size: 12px;
+  color: #999;
+  transition: transform 0.2s ease;
+}
+
+.sort-bar .nasa-filter-order:hover .woocommerce-ordering .nasa-ordering .nasa-current-orderby::after {
+  transform: rotate(180deg);
+}
+
+/* Animation for dropdown */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+  opacity: 0;
+    transform: translateY(0);
+  }
+}
+
 .sort-bar .nasa-filter-order .woocommerce-ordering .sort-text {
   line-height: 33px;
   white-space: nowrap;
 }
 .sort-bar .nasa-filter-order:hover .woocommerce-ordering {
-  border-color: #000;
-}
-.sort-bar .nasa-filter-order:hover .nasa-ordering .sub-ordering {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(10px);
+  border-color: #0635d3;
 }
 
 
